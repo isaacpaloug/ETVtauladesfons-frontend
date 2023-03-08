@@ -1,7 +1,10 @@
+import Carrusel from "./componentes/Carrusel";
 
 function App() {
   return (
-    <h1>Hola</h1>
+    <>
+    <Carrusel />
+    </>
   );
 }
 

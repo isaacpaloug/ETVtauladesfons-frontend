@@ -22,7 +22,6 @@ function LoginForm({ setIsLoggedIn }) {
                 console.log(response.data.Token);
 
                 // Mostramos un mensaje de éxito y actualizamos el estado de isLoggedIn
-                setIsLoggedIn(true);
             })
             .catch((error) => {
                 console.log(error);

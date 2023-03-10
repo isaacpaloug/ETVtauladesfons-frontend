@@ -1,15 +1,13 @@
-import Carrusel from "./componentes/Carrusel";
-
-import './App.css';
-import ReadMunicipis from "./componentes/ReadMunicipi";
-
-import {Button} from "react-bootstrap";
-import LoginForm from "./componentes/login";
-import {useEffect, useState} from "react";
+//importamos los comp creados
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import CreateMunicipi from "./componentes/createmunicipi";
-import EditMunicipiModal from "./componentes/UpdateMunicipi";
-import Registro from "./componentes/registrarse";
+
+
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Menu from "./componentes/Menu";
+import LoginForm from "./componentes/login";
+import { Button } from "react-bootstrap";
+import CrudAllotjaments from "./crud/CrudAllotjaments";
 
 
 
@@ -37,7 +35,15 @@ function App() {
   const [showLoginForm, setShowLoginForm] = useState(false);
   return (
     <>
-      <div className="login">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Menu />}>
+            <Route path="/login" element={<LoginForm />}></Route>
+            <Route path="/CRUDAllotjaments" element={<CrudAllotjaments />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+      {/* <div className="login">
         {!isLoggedIn ? (
             <div>
               {showLoginForm ? (
@@ -54,29 +60,7 @@ function App() {
         )}
         <button onClick={handleMostrarRegistro}>Registrarse</button>
         {mostrarRegistro && <Registro />}
-      </div>
-
-    <div>
-
-      <h1>Benvinguts a ETV Tauladesfons!</h1>
-      <h2>Allotjaments destacats</h2>
-    </div>
-    <Carrusel />
-    <div className="main">
-      <h2 className="main-header">React Crud Operations</h2>
-
-        <br/>
-        <br/>
-
-      <CreateMunicipi />
-        <br/>
-
-        <ReadMunicipis />
-
-
-
-
-    </div>
+      </div> */}
     </>
   );
 }

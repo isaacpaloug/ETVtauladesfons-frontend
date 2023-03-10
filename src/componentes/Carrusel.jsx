@@ -40,7 +40,6 @@ function Carrusel() {
             className="carousel"
             style={{
                 boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.12), 0 2px 5px 0 rgba(0, 0, 0, 0.12)",
-                borderRadius: "10px",
             }}
         >
             <div>
@@ -82,7 +81,6 @@ function Carrusel() {
                             height: "500px",
                             width: "100%",
                             maxWidth: "100%",
-                            borderRadius: "10px",
                         }}
                         src={fotos[index].URL}
                         alt={fotos[index].DESCRIPCIO}

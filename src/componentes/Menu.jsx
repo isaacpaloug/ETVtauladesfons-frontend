@@ -22,15 +22,12 @@ function Menu() {
 
                     <Link className="nav-link" to="/">Inici</Link>
                     <Nav.Link onClick={handleShowLoginModal}>Login</Nav.Link>
-                    <Link className="nav-link" to="/CRUDallotjaments">CRUDAllorjaments</Link>
+                    <Link className="nav-link" to="/CRUDallotjaments">CRUDAllotjaments</Link>
                     <Link className="nav-link" to="/registrarse">Registre Usuari nou</Link>
-                    <Link className="nav-link" to="/CRUDMunicipis">CRUDMunicipis</Link>
                     <Link className="nav-link" to="/contacte">Contacte</Link>
                 </Nav>
             </Navbar>
-            <Container>
                 <Outlet />
-            </Container>
             <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>

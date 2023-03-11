@@ -38,12 +38,6 @@ function Menu() {
                     <LoginForm onClose={handleCloseLoginModal} />
                 </Modal.Body>
             </Modal>
-            {/* <div>
-
-                <h1>Benvinguts a ETV Tauladesfons!</h1>
-                <h2>Allotjaments destacats</h2>
-            </div>
-            <Carrusel /> */}
         </>
     )
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 
+
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Menu from "./componentes/Menu";
 import LoginForm from "./componentes/login";
@@ -10,6 +11,8 @@ import { Button } from "react-bootstrap";
 import CrudAllotjaments from "./crud/CrudAllotjaments";
 import Registro from "./componentes/registrarse";
 import ReadMunicipis from "./componentes/ReadMunicipi";
+import Carrusel from "./componentes/Carrusel";
+import AllotjamentsList from "./componentes/LlistaAllotjaments";
 
 
 
@@ -46,24 +49,13 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* <div className="login">
-        {!isLoggedIn ? (
-            <div>
-              {showLoginForm ? (
-                  <LoginForm setIsLoggedIn={setIsLoggedIn} />
-              ) : (
-                  <Button onClick={() => setShowLoginForm(true)}>Login</Button>
-              )}
-            </div>
-        ) : (
-            <div>
-              <h1>You are logged in</h1>
-              <Button onClick={handleLogout}>Logout</Button>
-            </div>
-        )}
-        <button onClick={handleMostrarRegistro}>Registrarse</button>
-        {mostrarRegistro && <Registro />}
-      </div> */}
+      <div>
+<h1 style={{margin: "20px"}}>Benvinguts a ETV Tauladesfons!</h1>
+<h2 style={{margin: "20px"}}>Alguns dels nostres allotjaments</h2>
+<br></br>
+</div>
+<Carrusel />
+<AllotjamentsList />
     </>
   );
 }

@@ -25,6 +25,7 @@ function Menu() {
                     <Link className="nav-link" to="/CRUDallotjaments">CRUDAllorjaments</Link>
                     <Link className="nav-link" to="/registrarse">Registre Usuari nou</Link>
                     <Link className="nav-link" to="/CRUDMunicipis">CRUDMunicipis</Link>
+                    <Link className="nav-link" to="/contacte">Contacte</Link>
                 </Nav>
             </Navbar>
             <Container>

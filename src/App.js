@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
-
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Menu from "./componentes/Menu";
 import LoginForm from "./componentes/login";
@@ -10,6 +9,7 @@ import { Button } from "react-bootstrap";
 import CrudAllotjaments from "./crud/CrudAllotjaments";
 import Registro from "./componentes/registrarse";
 import ReadMunicipis from "./componentes/ReadMunicipi";
+import ContactForm from "./componentes/formulario";
 
 
 
@@ -43,6 +43,7 @@ function App() {
             <Route path="/login" element={<LoginForm />}></Route>
             <Route path="/CRUDAllotjaments" element={<CrudAllotjaments />}></Route>
             <Route path="/registrarse" element={<Registro />}></Route>
+            <Route path="/contacte" element={<ContactForm />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

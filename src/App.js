@@ -8,6 +8,8 @@ import Menu from "./componentes/Menu";
 import LoginForm from "./componentes/login";
 import { Button } from "react-bootstrap";
 import CrudAllotjaments from "./crud/CrudAllotjaments";
+import Registro from "./componentes/registrarse";
+import ReadMunicipis from "./componentes/ReadMunicipi";
 
 
 
@@ -40,6 +42,7 @@ function App() {
           <Route path="/" element={<Menu />}>
             <Route path="/login" element={<LoginForm />}></Route>
             <Route path="/CRUDAllotjaments" element={<CrudAllotjaments />}></Route>
+            <Route path="/registrarse" element={<Registro />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

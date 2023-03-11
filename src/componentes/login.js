@@ -51,7 +51,7 @@ function LoginForm() {
     };
 
     const handleLogout = () => {
-        if (window.confirm("¿Está seguro que quiere hacer logout?")) {
+        if (window.confirm("¿Estas segur de voler fer logout?")) {
             // Borrar la cookie
             Cookies.remove("token");
 
@@ -65,7 +65,7 @@ function LoginForm() {
         <div>
             {showMessage && isLoggedIn && (
                 <div>
-                    <h1>Bienvenido{isAdmin ? ' administrador' : ''}, estás logueado correctamente</h1>
+                    <h1>Benvingut{isAdmin ? ' administrador' : ''}, has iniciat sessió correctament</h1>
                     <Button onClick={handleLogout}>Logout</Button>
                 </div>
             )}

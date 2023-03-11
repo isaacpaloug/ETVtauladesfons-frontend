@@ -12,6 +12,7 @@ import ContactForm from "./componentes/formulario";
 import CrudAllotjaments from "./components/crud/Allotjaments";
 import Carrusel from "./componentes/Carrusel";
 import AllotjamentsList from "./componentes/LlistaAllotjaments";
+import Benvinguda from "./componentes/Benvinguda";
 
 
 
@@ -49,13 +50,9 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      <div>
-<h1 style={{margin: "20px"}}>Benvinguts a ETV Tauladesfons!</h1>
-<h2 style={{margin: "20px"}}>Alguns dels nostres allotjaments</h2>
-<br></br>
-</div>
-<Carrusel />
-<AllotjamentsList />
+      <Benvinguda />
+      <Carrusel />
+      <AllotjamentsList />
     </>
   );
 }

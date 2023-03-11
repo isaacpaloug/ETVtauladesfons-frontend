@@ -106,4 +106,4 @@ const CrudAllotjaments = () => {
     )
 }
 
-export default CrudAllotjaments
+export default CrudAllotjaments;

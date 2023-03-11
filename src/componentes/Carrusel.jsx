@@ -5,8 +5,8 @@ import {Button} from "react-bootstrap";
 
 function Carrusel() {
     const [index, setIndex] = useState(0);
-    const [fotos, setFotos] = useState([]);
-    const length = fotos.length;
+    const [imatges, setImatges] = useState([]);
+    const length = imatges.length;
 
     const handlePrevious = () => {
         const newIndex = index - 1;
@@ -22,72 +22,41 @@ function Carrusel() {
         axios
             .get("http://www.etvtauladesfons.com/api/fotografies")
             .then((response) => {
-                setFotos(response.data);
+                setImatges(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
 
         const interval = setInterval(() => {
-            handleNext();
-        }, 4000);
+            handlePrevious();
+        }, 2000);
 
         return () => clearInterval(interval);
-    }, []);
+    });
 
     return (
-        <div
-            className="carousel"
-            style={{
-                boxShadow: "0 0 5px 0 rgba(0, 0, 0, 0.12), 0 2px 5px 0 rgba(0, 0, 0, 0.12)",
-            }}
-        >
+
+        <div className="carousel" style={{display: "flex", alignItems: "center", alignContent: "center"}}>
             <div>
-                <Button
-                    style={{
-                        background: "none",
-                        border: "none",
-                        fontWeight: "bold",
-                        zIndex: "100",
-                        position: "absolute",
-                        left: 0,
-                        top: 180,
-                        fontSize: "80px",
-                        opacity: "0.7",
-                    }}
-                    onClick={handlePrevious}
-                >
-                    {"<"}
+                <Button variant="outline-secondary"
+                        style={{position: "absolute", zIndex: "100", left: "20px", top: 100, fontSize: "100px"}}
+                        onClick={handlePrevious}
+                > {"•"}
                 </Button>
-                <Button
-                    style={{
-                        background: "none",
-                        border: "none",
-                        fontWeight: "bold",
-                        zIndex: "100",
-                        position: "absolute",
-                        right: 0,
-                        top: 180,
-                        fontSize: "80px",
-                        opacity: "0.7",
-                    }}
-                    onClick={handleNext}
-                >
-                    {">"}
+                <Button variant="outline-secondary"
+                        style={{position: "absolute", zIndex: "100", left: "456px", top: 100, fontSize: "100px"}}
+                        onClick={handleNext}> {"•"}
                 </Button>
-                {fotos.length > 0 && (
-                    <img
-                        style={{
-                            height: "500px",
-                            width: "100%",
-                            maxWidth: "100%",
-                        }}
-                        src={fotos[index].URL}
-                        alt={fotos[index].DESCRIPCIO}
+                {imatges.length > 0 && (
+                    <img style={{margin: "20px", height: "350px", width: "500px", maxWidth: "500px"}}
+                        src={imatges[index].URL}
+                        alt={imatges[index].DESCRIPCIO}
                     />
                 )}
             </div>
         </div>
+
     );
 }
 

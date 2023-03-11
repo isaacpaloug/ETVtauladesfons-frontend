@@ -1,11 +1,10 @@
 // IMPORTS
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField, TablePagination, Box } from '@mui/material';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField, TablePagination } from '@mui/material';
 import { Modal } from '@mui/material'
 import { Edit, Delete } from '@mui/icons-material';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 
 
 //URL BASE
@@ -45,7 +44,6 @@ const CrudAllotjaments = () => {
             Authorization: `Bearer ${token}`
         }
     };
-
     const [allotjamentSeleccionat, setAllotjamentSeleccionat] = useState({
         NOM_COMERCIAL: '',
         NUM_REGISTRE: '',
@@ -68,7 +66,11 @@ const CrudAllotjaments = () => {
         }))
     }
 
-    //Modal - Crea - Edita -Borra
+    useEffect(() => {
+        getAllotjaments()
+    }, [])
+
+    // HOOKS DE MODAL
     const abrirCerrarModalInsertar = () => {
         setModalInsertar(!modalInsertar);
     }
@@ -83,12 +85,6 @@ const CrudAllotjaments = () => {
         setAllotjamentSeleccionat(allotjament);
         (caso === 'Editar') ? abrirCerrarModalEditar() : abrirCerrarModalEliminar()
     }
-
-    useEffect(() => {
-        getAllotjaments()
-    }, [])
-
-
 
     // ! GET ALL
     const getAllotjaments = async () => {
@@ -206,6 +202,25 @@ const CrudAllotjaments = () => {
 
         </div>
     )
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const startIndex = page * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    const paginatedList = data.slice(startIndex, endIndex);
+
+    const handleChangePage = (
+        event: React.MouseEvent<HTMLButtonElement> | null,
+        newPage: number,
+    ) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
     return (
         <div>
             <br />
@@ -243,6 +258,14 @@ const CrudAllotjaments = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                    component="div"
+                    count={data.length}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    rowsPerPage={rowsPerPage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
             <Modal open={modalInsertar} onClose={abrirCerrarModalInsertar}>
                 {bodyInsertar}
             </Modal>

@@ -6,10 +6,10 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Menu from "./componentes/Menu";
 import LoginForm from "./componentes/login";
 import { Button } from "react-bootstrap";
-import CrudAllotjaments from "./crud/CrudAllotjaments";
 import Registro from "./componentes/registrarse";
 import ReadMunicipis from "./componentes/ReadMunicipi";
 import ContactForm from "./componentes/formulario";
+import CrudAllotjaments from "./components/crud/Allotjaments";
 
 
 

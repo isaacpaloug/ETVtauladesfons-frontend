@@ -12,11 +12,17 @@ function LoginForm() {
     const [showMessage, setShowMessage] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
-
+    useEffect(() => {
+        // Comprobamos si hay un token almacenado en la cookie
+        const token = Cookies.get("token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
     useEffect(() => {
         // Comprobar si hay una cookie válida al cargar la página
         const token = Cookies.get("token");
-        const isAdmin = Cookies.get("isAdmin") === "true";
+        const isAdmin = Cookies.get("isAdmin");
 
         if (token) {
             setIsLoggedIn(true);
@@ -42,6 +48,7 @@ function LoginForm() {
                 setIsAdmin(response.data.data.ADMINISTRADOR === 1);
 
                 console.log(response.data.data.TOKEN);
+                console.log(response.data.data.ADMINISTRADOR);
             })
             .catch((error) => {
                 console.log(error);

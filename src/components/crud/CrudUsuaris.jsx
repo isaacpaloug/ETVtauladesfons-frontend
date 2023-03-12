@@ -45,9 +45,11 @@ const CrudUsuaris = () => {
         }
     };
     const [usuariSeleccionat, setUsuariSeleccionat] = useState({
-        NOM_COMPLET: '',
         DNI: '',
+        NOM_COMPLET: '',
         CORREU_ELECTRONIC: '',
+        TELEFON: '',
+        CONTRASENYA:''
     })
     const handleChange = e => {
         const { name, value } = e.target;
@@ -58,7 +60,7 @@ const CrudUsuaris = () => {
     }
 
     useEffect(() => {
-        getUsuari()
+        getUsuaris()
     }, [])
 
     // HOOKS DE MODAL
@@ -78,8 +80,8 @@ const CrudUsuaris = () => {
     }
 
     // ! GET ALL
-    const getUsuari = async () => {
-        await axios.get(REST_URL)
+    const getUsuaris = async () => {
+        await axios.get(REST_URL, config)
             .then(response => {
                 setData(response.data.data);
             })
@@ -100,7 +102,7 @@ const CrudUsuaris = () => {
         await axios.put(REST_URL + '/put/' + usuariSeleccionat.ID_USUARI, usuariSeleccionat, config)
             .then(response => {
                 abrirCerrarModalEditar();
-                getUsuari();
+                getUsuaris();
             })
     }
     // ! DELETE
@@ -118,11 +120,14 @@ const CrudUsuaris = () => {
             <br />
             <h3 align="center">Afegir un nou usuari</h3>
             <br />
-            <TextField name='NOM_COMPLET' style={inputMaterial} label="Nom Usuari" onChange={handleChange} />
+            <TextField name='DNI' style={inputMaterial} label="Dni" onChange={handleChange} />
             <br />
-            <TextField name='DNI' style={inputMaterial} label="DNI" onChange={handleChange} />
+            <TextField name='NOM_COMPLET' style={inputMaterial} label="Num Registre" onChange={handleChange} />
             <br />
-            <TextField name='CORREU_ELECTRONIC' style={inputMaterial} label="Correu Electrònic" onChange={handleChange} />
+            <TextField name='CORREU_ELECTRONIC' style={inputMaterial} label="Correu Electronic" onChange={handleChange} />
+            <br />
+            <TextField name='TELEFON' style={inputMaterial} label="Telefon" onChange={handleChange} />
+            <br />
             <div align="right">
                 <Button variant="contained" color="primary" onClick={() => insertUsuari()}>Insertar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
@@ -133,13 +138,18 @@ const CrudUsuaris = () => {
     const bodyEditar = (
         <div style={modalStyle}>
             <br />
-            <h3 align="center">Editar usuari</h3>
+            <h3 align="center">Editar Usuari</h3>
             <br />
-            <TextField name='NOM_COMPLET' style={inputMaterial} label="Nom Usuari" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.NOM_COMPLET} />
+            <TextField name='DNI' style={inputMaterial} label="Nom Comercial" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.DNI} />
             <br />
-            <TextField name='DNI' style={inputMaterial} label="DNI" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.DNI}/>
+            <TextField name='NOM_COMPLET' style={inputMaterial} label="Nom Complet" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.NOM_COMPLET} />
             <br />
-            <TextField name='CORREU_ELECTRONIC' style={inputMaterial} label="Correu Electrònic" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.CORREU_ELECTRONIC}/>
+            <TextField name='CORREU_ELECTRONIC' style={inputMaterial} label="Correu Electronic" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.CORREU_ELECTRONIC} />
+            <br />
+            <TextField name='TELEFON' style={inputMaterial} label="Telefon" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.TELEFON} />
+            <br />
+            <TextField name='CONTRASENYA' style={inputMaterial} label="Contrasenya" onChange={handleChange} />
+            <br />
             <div align="right">
                 <Button variant="contained" color="primary" onClick={() => updateUsuari()}>Actualitzar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalEditar()}>Cancelar</Button>
@@ -149,7 +159,7 @@ const CrudUsuaris = () => {
     const bodyEliminar = (
         <div style={modalStyle}>
             <br />
-            <h4 align="center">Estàs segur de que vols eliminar l'usuari <b>{usuariSeleccionat && usuariSeleccionat.NOM_COMPLET}</b> ?</h4>
+            <h4 align="center">Estàs segur de que vols eliminar l'usuari <b>{usuariSeleccionat && usuariSeleccionat.NOM_COMPLET}</b>?</h4>
             <div align="right" style={inputMaterial}>
                 <Button color="primary" onClick={() => deleteUsuari()}>Sí</Button>
                 <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>
@@ -157,7 +167,6 @@ const CrudUsuaris = () => {
 
         </div>
     )
-    
     return (
         <div>
             <br />

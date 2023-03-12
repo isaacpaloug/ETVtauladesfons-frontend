@@ -194,7 +194,7 @@ const CrudAllotjaments = () => {
     const bodyEliminar = (
         <div style={modalStyle}>
             <br />
-            <h4 align="center">Estás segur de que vols eliminar l'allotjament <b>{allotjamentSeleccionat && allotjamentSeleccionat.NOM_COMERCIAL}</b> </h4>
+            <h4 align="center">Estàs segur de que vols eliminar l'allotjament <b>{allotjamentSeleccionat && allotjamentSeleccionat.NOM_COMERCIAL}</b>?</h4>
             <div align="right" style={inputMaterial}>
                 <Button color="primary" onClick={() => deleteAllotjament()}>Sí</Button>
                 <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>
@@ -224,7 +224,7 @@ const CrudAllotjaments = () => {
     return (
         <div>
             <br />
-            <h1>Crud Alojamientos</h1>
+            <h1>Crud Allotjaments</h1>
             <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button>
             <br /><br />
             <TableContainer>

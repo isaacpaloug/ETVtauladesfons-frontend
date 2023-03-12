@@ -54,6 +54,7 @@ function LoginForm() {
         if (window.confirm("¿Estas segur de voler fer logout?")) {
             // Borrar la cookie
             Cookies.remove("token");
+            Cookies.remove("isAdmin");
 
             // Actualizar el estado de isLoggedIn
             setIsLoggedIn(false);

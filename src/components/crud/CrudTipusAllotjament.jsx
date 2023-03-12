@@ -140,7 +140,7 @@ const CrudTipusAllotjaments = () => {
     const bodyEliminar = (
         <div style={modalStyle}>
             <br />
-            <h4 align="center">Estás segur de que vols eliminar el tipus <b>{tipusSeleccionat && tipusSeleccionat.NOM_TIPUS}</b> </h4>
+            <h4 align="center">Estàs segur de que vols eliminar el tipus <b>{tipusSeleccionat && tipusSeleccionat.NOM_TIPUS}?</b> </h4>
             <div align="right" style={inputMaterial}>
                 <Button color="primary" onClick={() => deleteTipus()}>Sí</Button>
                 <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>

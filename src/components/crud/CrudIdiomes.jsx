@@ -140,7 +140,7 @@ const CrudIdiomes = () => {
     const bodyEliminar = (
         <div style={modalStyle}>
             <br />
-            <h4 align="center">Estás segur de que vols eliminar l'idioma <b>{idiomaSeleccionat && idiomaSeleccionat.NOM_IDIOMA}</b> </h4>
+            <h4 align="center">Estàs segur de que vols eliminar l'idioma <b>{idiomaSeleccionat && idiomaSeleccionat.NOM_IDIOMA}?</b> </h4>
             <div align="right" style={inputMaterial}>
                 <Button color="primary" onClick={() => deleteIdioma()}>Sí</Button>
                 <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>

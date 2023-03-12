@@ -1,14 +1,14 @@
 // IMPORTS
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField } from '@mui/material';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField} from '@mui/material';
 import { Modal } from '@mui/material'
 import { Edit, Delete } from '@mui/icons-material';
 import Cookies from 'js-cookie';
 
 
 //URL BASE
-const REST_URL = 'http://www.etvtauladesfons.com/api/vacances';
+const REST_URL = 'http://www.etvtauladesfons.com/api/categories';
 
 //? CSS
 const modalStyle = {
@@ -31,31 +31,32 @@ const inputMaterial = {
 
 
 // ! FUNCIO CRUD
-const CrudVacances = () => {
+const CrudCategories = () => {
 
     const [data, setData] = useState([]);
     const [modalInsertar, setModalInsertar] = useState(false);
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
     const token = Cookies.get('token');
+    const adminCookie = Cookies.get('isAdmin');
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     };
-    const [vacancesSeleccionat, setVacancesSeleccionat] = useState({
-        NOM_VACANCES: ''
+    const [categoriaSeleccionada, setcategoriaSeleccionada] = useState({
+        NOM_CATEGORIA: '',
     })
     const handleChange = e => {
         const { name, value } = e.target;
-        setVacancesSeleccionat(prevState => ({
+        setcategoriaSeleccionada(prevState => ({
             ...prevState,
             [name]: value
         }))
     }
 
     useEffect(() => {
-        getVacances()
+        getCategoria()
     }, [])
 
     // HOOKS DE MODAL
@@ -69,40 +70,40 @@ const CrudVacances = () => {
         setModalEliminar(!modalEliminar);
     }
 
-    const seleccionarVacances = (vacances, caso) => {
-        setVacancesSeleccionat(vacances);
+    const seleccionarCategoria = (categoria, caso) => {
+        setcategoriaSeleccionada(categoria);
         (caso === 'Editar') ? abrirCerrarModalEditar() : abrirCerrarModalEliminar()
     }
 
     // ! GET ALL
-    const getVacances = async () => {
+    const getCategoria = async () => {
         await axios.get(REST_URL)
             .then(response => {
-                setData(response.data.result);
+                setData(response.data.data);
             })
             .catch((error) => console.log(error));
     }
 
     // ! POST
-    const insertVacances = async () => {
-        await axios.post(REST_URL, vacancesSeleccionat, config)
+    const insertCategoria = async () => {
+        await axios.post(REST_URL, categoriaSeleccionada, config)
             .then(response => {
-                setData(data.concat(response.data.result))
+                setData(data.concat(response.data.data))
                 abrirCerrarModalInsertar()
                 window.location.reload(true);
             })
     }
     // ! PUT
-    const updateVacances = async () => {
-        await axios.put(REST_URL + '/put/' + vacancesSeleccionat.ID_VACANCES, vacancesSeleccionat, config)
+    const updateCategoria = async () => {
+        await axios.put(REST_URL + '/put/' + categoriaSeleccionada.ID_CATEGORIA, categoriaSeleccionada, config)
             .then(response => {
                 abrirCerrarModalEditar();
-                getVacances();
+                getCategoria();
             })
     }
     // ! DELETE
-    const deleteVacances = async () => {
-        await axios.delete(REST_URL + "/destroy/" + vacancesSeleccionat.ID_VACANCES, config)
+    const deleteCategoria = async () => {
+        await axios.delete(REST_URL + "/destroy/" + categoriaSeleccionada.ID_CATEGORIA, config)
             .then(response => {
                 setData();
                 abrirCerrarModalEliminar();
@@ -113,11 +114,11 @@ const CrudVacances = () => {
     const bodyInsertar = (
         <div style={modalStyle}>
             <br />
-            <h3 align="center">Afegir un nou tipus de  vacances</h3>
+            <h3 align="center">Afegir una nova categoria</h3>
             <br />
-            <TextField name='NOM_VACANCES' style={inputMaterial} label="Nom Vacances" onChange={handleChange} />
+            <TextField name='NOM_CATEGORIA' style={inputMaterial} label="Nom Categoria" onChange={handleChange} />
             <div align="right">
-                <Button variant="contained" color="primary" onClick={() => insertVacances()}>Insertar</Button>
+                <Button variant="contained" color="primary" onClick={() => insertCategoria()}>Insertar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
             </div>
         </div>
@@ -126,12 +127,12 @@ const CrudVacances = () => {
     const bodyEditar = (
         <div style={modalStyle}>
             <br />
-            <h3 align="center">Editar Vacances</h3>
+            <h3 align="center">Editar categoria</h3>
             <br />
-            <TextField name='NOM_VACANCES' style={inputMaterial} label="Nom Vacances" onChange={handleChange} value={vacancesSeleccionat && vacancesSeleccionat.NOM_VACANCES} />
+            <TextField name='NOM_CATEGORIA' style={inputMaterial} label="Nom Categoria" onChange={handleChange} value={categoriaSeleccionada && categoriaSeleccionada.NOM_CATEGORIA} />
             <br />
             <div align="right">
-                <Button variant="contained" color="primary" onClick={() => updateVacances()}>Actualitzar</Button>
+                <Button variant="contained" color="primary" onClick={() => updateCategoria()}>Actualitzar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalEditar()}>Cancelar</Button>
             </div>
         </div>
@@ -139,9 +140,9 @@ const CrudVacances = () => {
     const bodyEliminar = (
         <div style={modalStyle}>
             <br />
-            <h4 align="center">Estàs segur de que vols eliminar les vacances <b>{vacancesSeleccionat && vacancesSeleccionat.NOM_VACANCES}?</b> </h4>
+            <h4 align="center">Estàs segur de que vols eliminar la categoria <b>{categoriaSeleccionada && categoriaSeleccionada.NOM_CATEGORIA}</b> ?</h4>
             <div align="right" style={inputMaterial}>
-                <Button color="primary" onClick={() => deleteVacances()}>Sí</Button>
+                <Button color="primary" onClick={() => deleteCategoria()}>Sí</Button>
                 <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>
             </div>
 
@@ -151,7 +152,7 @@ const CrudVacances = () => {
     return (
         <div>
             <br />
-            <h1>Crud Idiomes</h1>
+            <h1>Crud Categories</h1>
             <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button>
             <br /><br />
             <TableContainer>
@@ -166,19 +167,19 @@ const CrudVacances = () => {
                     </TableHead>
 
                     <TableBody>
-                        {data.map((vacances) => (
-                            <TableRow key={vacances.ID_VACANCES}>
-                                {Object.entries(vacances).map(([key, value]) => (
+                        {data.map((categoria) => (
+                            <TableRow key={categoria.ID_CATEGORIA}>
+                                {Object.entries(categoria).map(([key, value]) => (
                                     <TableCell
-                                        key={`${vacances.ID_VACANCES}_${key}`}
+                                        key={`${categoria.ID_CATEGORIA}_${key}`}
                                     >
                                         {value}
                                     </TableCell>
                                 ))}
                                 <TableCell>
-                                    <Edit style={cursorPointer} onClick={() => seleccionarVacances(vacances, 'Editar')} />
+                                    <Edit style={cursorPointer} onClick={() => seleccionarCategoria(categoria, 'Editar')} />
                                     &nbsp;&nbsp;
-                                    <Delete style={cursorPointer} onClick={() => seleccionarVacances(vacances, 'Eliminar')} />
+                                    <Delete style={cursorPointer} onClick={() => seleccionarCategoria(categoria, 'Eliminar')} />
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -202,4 +203,4 @@ const CrudVacances = () => {
     )
 }
 
-export default CrudVacances;
+export default CrudCategories;

@@ -21,10 +21,16 @@ function Menu() {
                 <Nav className="mr-auto">
 
                     <Link className="nav-link" to="/">Inici</Link>
+                    <Link className="nav-link" to="/llista">Llista allotjaments</Link>
                     <Nav.Link onClick={handleShowLoginModal}>Login</Nav.Link>
-                    <Link className="nav-link" to="/CRUDallotjaments">CRUDAllotjaments</Link>
                     <Link className="nav-link" to="/registrarse">Registre Usuari nou</Link>
                     <Link className="nav-link" to="/contacte">Contacte</Link>
+                    <Link className="nav-link" to="/CRUDallotjaments">CRUDAllotjaments</Link>
+                    <Link className="nav-link" to="/CRUDVacances">CRUDVacances</Link>
+                    <Link className="nav-link" to="/CRUDIdiomes">CRUDIdiomes</Link>
+                    <Link className="nav-link" to="/CRUDTipus">CRUDTipusAllotjaments</Link>
+                    <Link className="nav-link" to="/CRUDServeis">CRUDServeis</Link>
+                    <Link className="nav-link" to="/CRUDCategories">CRUDCategories</Link>
                 </Nav>
             </Navbar>
                 <Outlet />

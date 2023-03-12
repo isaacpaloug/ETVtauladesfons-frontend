@@ -53,6 +53,12 @@ function Menu() {
                             <Link className="nav-link" to="/CRUDCategories">
                                 CRUDCategories
                             </Link>
+                            <Link className="nav-link" to="/CRUDComentaris">
+                                CRUDComentaris
+                            </Link>
+                            <Link className="nav-link" to="/DSTCAllotjaments">
+                                DESTCAllotjaments
+                            </Link>
                         </>
                     )}
                 </Nav>

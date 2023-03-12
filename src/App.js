@@ -16,7 +16,7 @@ import Benvinguda from "./componentes/Benvinguda";
 import CrudVacances from "./components/crud/CrudVacances";
 import CrudIdiomes from "./components/crud/CrudIdiomes";
 import CrudTipusAllotjaments from "./components/crud/CrudTipusAllotjament";
-import CrudServeis from "./components/CrudServeis";
+import CrudServeis from "./components/crud/CrudServeis";
 import CrudCategories from "./components/crud/CrudCategoria";
 
 

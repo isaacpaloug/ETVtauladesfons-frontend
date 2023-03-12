@@ -1,7 +1,7 @@
 // IMPORTS
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField} from '@mui/material';
+import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField, TablePagination } from '@mui/material';
 import { Modal } from '@mui/material'
 import { Edit, Delete } from '@mui/icons-material';
 import Cookies from 'js-cookie';
@@ -30,6 +30,7 @@ const inputMaterial = {
 }
 
 
+
 // ! FUNCIO CRUD
 const CrudUsuaris = () => {
 
@@ -49,7 +50,7 @@ const CrudUsuaris = () => {
         NOM_COMPLET: '',
         CORREU_ELECTRONIC: '',
         TELEFON: '',
-        CONTRASENYA:''
+        CONTRASENYA: ''
     })
     const handleChange = e => {
         const { name, value } = e.target;

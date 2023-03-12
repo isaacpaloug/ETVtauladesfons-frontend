@@ -20,7 +20,7 @@ function Menu() {
         <>
             <Navbar bg="dark" className="color-nav" variant="dark" expand="sm" sticky="top">
                 <Nav className="mr-auto">
-                    <Link className="nav-link" to="/">
+                    <Link className="nav-link" to="/inici">
                         Inici
                     </Link>
                     <Link className="nav-link" to="/llista">
@@ -33,7 +33,7 @@ function Menu() {
                     <Link className="nav-link" to="/contacte">
                         Contacte
                     </Link>
-                    {isAdmin &&  (
+                    {isAdmin && (
                         <>
                             <Link className="nav-link" to="/CRUDallotjaments">
                                 CRUDAllotjaments
@@ -58,6 +58,9 @@ function Menu() {
                             </Link>
                             <Link className="nav-link" to="/DSTCAllotjaments">
                                 DESTCAllotjaments
+                            </Link>
+                            <Link className="nav-link" to="/CRUDusuaris">
+                                CRUDUsuaris
                             </Link>
                         </>
                     )}

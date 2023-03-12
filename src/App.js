@@ -22,27 +22,7 @@ import CrudCategories from "./components/crud/CrudCategoria";
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    // Comprobamos si hay un token almacenado en la cookie
-    const token = Cookies.get("token");
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    // Borramos la cookie y actualizamos el estado de isLoggedIn
-    Cookies.remove("token");
-    setIsLoggedIn(false);
-  };
-  const [mostrarRegistro, setMostrarRegistro] = useState(false);
-
-  const handleMostrarRegistro = () => {
-    setMostrarRegistro(true);
-  };
-  const [showLoginForm, setShowLoginForm] = useState(false);
   return (
     <>
       <BrowserRouter>

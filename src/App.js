@@ -18,6 +18,8 @@ import CrudIdiomes from "./components/crud/CrudIdiomes";
 import CrudTipusAllotjaments from "./components/crud/CrudTipusAllotjament";
 import CrudServeis from "./components/crud/CrudServeis";
 import CrudCategories from "./components/crud/CrudCategoria";
+import CrudComentaris from "./components/crud/CrudComentaris";
+import DestcAllotjaments from "./components/crud/DestacAllotjament";
 
 
 
@@ -38,6 +40,8 @@ function App() {
             <Route path="/CRUDTipus" element={<CrudTipusAllotjaments />}></Route>
             <Route path="/CRUDServeis" element={<CrudServeis />}></Route>
             <Route path="/CRUDCategories" element={<CrudCategories />}></Route>
+            <Route path="/CRUDComentaris" element={<CrudComentaris />}></Route>
+            <Route path="/DSTCAllotjaments" element={<DestcAllotjaments />}></Route>
           </Route>
         </Routes>
       </BrowserRouter>

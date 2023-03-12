@@ -129,7 +129,7 @@ const CrudIdiomes = () => {
             <br />
             <h3 align="center">Editar idioma</h3>
             <br />
-            <TextField name='NOM_IDIOMA' style={inputMaterial} label="Nom Comercial" onChange={handleChange} value={idiomaSeleccionat && idiomaSeleccionat.NOM_IDIOMA} />
+            <TextField name='NOM_IDIOMA' style={inputMaterial} label="Idioma" onChange={handleChange} value={idiomaSeleccionat && idiomaSeleccionat.NOM_IDIOMA} />
             <br />
             <div align="right">
                 <Button variant="contained" color="primary" onClick={() => updateIdioma()}>Actualitzar</Button>

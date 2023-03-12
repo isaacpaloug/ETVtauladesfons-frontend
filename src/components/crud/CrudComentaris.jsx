@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 
 
 //URL BASE
-const REST_URL = 'http://www.etvtauladesfons.com/api/tipus';
+const REST_URL = 'http://www.etvtauladesfons.com/api/comentaris';
 
 //? CSS
 const modalStyle = {
@@ -31,10 +31,10 @@ const inputMaterial = {
 
 
 // ! FUNCIO CRUD
-const CrudTipusAllotjaments = () => {
+const CrudComentaris = () => {
 
     const [data, setData] = useState([]);
-    const [modalInsertar, setModalInsertar] = useState(false);
+    // const [modalInsertar, setModalInsertar] = useState(false);
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
     const token = Cookies.get('token');
@@ -44,25 +44,25 @@ const CrudTipusAllotjaments = () => {
             Authorization: `Bearer ${token}`
         }
     };
-    const [tipusSeleccionat, setTipusSeleccionat] = useState({
-        NOM_TIPUS: '',
+    const [comentariSeleccionat, setComentariSeleccionat] = useState({
+        DESCRIPCIO: '',
     })
     const handleChange = e => {
         const { name, value } = e.target;
-        setTipusSeleccionat(prevState => ({
+        setComentariSeleccionat(prevState => ({
             ...prevState,
             [name]: value
         }))
     }
 
     useEffect(() => {
-        getTipus()
+        getComentaris()
     }, [])
 
     // HOOKS DE MODAL
-    const abrirCerrarModalInsertar = () => {
-        setModalInsertar(!modalInsertar);
-    }
+    // const abrirCerrarModalInsertar = () => {
+    //     setModalInsertar(!modalInsertar);
+    // }
     const abrirCerrarModalEditar = () => {
         setModalEditar(!modalEditar);
     }
@@ -70,13 +70,13 @@ const CrudTipusAllotjaments = () => {
         setModalEliminar(!modalEliminar);
     }
 
-    const seleccionarTipus = (tipus, caso) => {
-        setTipusSeleccionat(tipus);
+    const seleccionarComentari = (comentari, caso) => {
+        setComentariSeleccionat(comentari);
         (caso === 'Editar') ? abrirCerrarModalEditar() : abrirCerrarModalEliminar()
     }
 
     // ! GET ALL
-    const getTipus = async () => {
+    const getComentaris = async () => {
         await axios.get(REST_URL)
             .then(response => {
                 setData(response.data.data);
@@ -84,55 +84,55 @@ const CrudTipusAllotjaments = () => {
             .catch((error) => console.log(error));
     }
 
-    // ! POST
-    const insertTipus = async () => {
-        await axios.post(REST_URL, tipusSeleccionat, config)
-            .then(response => {
-                setData(data.concat(response.data.data))
-                abrirCerrarModalInsertar()
-                window.location.reload(true);
-            })
-    }
+    // // ! POST
+    // const insertcomentari = async () => {
+    //     await axios.post(REST_URL, comentariSeleccionat, config)
+    //         .then(response => {
+    //             setData(data.concat(response.data.data))
+    //             abrirCerrarModalInsertar()
+    //             window.location.reload(true);
+    //         })
+    // }
     // ! PUT
-    const updateTipus = async () => {
-        await axios.put(REST_URL + '/put/' + tipusSeleccionat.ID_TIPUS, tipusSeleccionat, config)
+    const updateComentari = async () => {
+        await axios.put(REST_URL + '/put/' + comentariSeleccionat.ID_COMENTARI, comentariSeleccionat, config)
             .then(response => {
                 abrirCerrarModalEditar();
-                getTipus();
+                getComentaris();
             })
     }
     // ! DELETE
-    const deleteTipus = async () => {
-        await axios.delete(REST_URL + "/destroy/" + tipusSeleccionat.ID_TIPUS, config)
+    const deleteComentari = async () => {
+        await axios.delete(REST_URL + "/destroy/" + comentariSeleccionat.ID_COMENTARI, config)
             .then(response => {
                 setData();
                 abrirCerrarModalEliminar();
                 window.location.reload(false);
             })
     }
-    // Body Insertar
-    const bodyInsertar = (
-        <div style={modalStyle}>
-            <br />
-            <h3 align="center">Afegir un nou tipus</h3>
-            <br />
-            <TextField name='NOM_TIPUS' style={inputMaterial} label="Nom tipus" onChange={handleChange} />
-            <div align="right">
-                <Button variant="contained" color="primary" onClick={() => insertTipus()}>Insertar</Button>
-                <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
-            </div>
-        </div>
-    );
+    // // Body Insertar
+    // const bodyInsertar = (
+    //     <div style={modalStyle}>
+    //         <br />
+    //         <h3 align="center">Afegir un nou idioma</h3>
+    //         <br />
+    //         <TextField name='DESCRIPCIO' style={inputMaterial} label="Nom Idioma" onChange={handleChange} />
+    //         <div align="right">
+    //             <Button variant="contained" color="primary" onClick={() => insertIdioma()}>Insertar</Button>
+    //             <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
+    //         </div>
+    //     </div>
+    // );
     // Body Editar
     const bodyEditar = (
         <div style={modalStyle}>
             <br />
-            <h3 align="center">Editar tipus</h3>
+            <h3 align="center">Editar comentari</h3>
             <br />
-            <TextField name='NOM_TIPUS' style={inputMaterial} label="Tipus Allotjament" onChange={handleChange} value={tipusSeleccionat && tipusSeleccionat.NOM_TIPUS} />
+            <TextField name='DESCRIPCIO' style={inputMaterial} label="Corregeixi el comentari" onChange={handleChange} value={comentariSeleccionat && comentariSeleccionat.DESCRIPCIO} />
             <br />
             <div align="right">
-                <Button variant="contained" color="primary" onClick={() => updateTipus()}>Actualitzar</Button>
+                <Button variant="contained" color="primary" onClick={() => updateComentari()}>Actualitzar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalEditar()}>Cancelar</Button>
             </div>
         </div>
@@ -140,9 +140,9 @@ const CrudTipusAllotjaments = () => {
     const bodyEliminar = (
         <div style={modalStyle}>
             <br />
-            <h4 align="center">Estàs segur de que vols eliminar el tipus <b>{tipusSeleccionat && tipusSeleccionat.NOM_TIPUS}?</b> </h4>
+            <h4 align="center">Estàs segur de que vols eliminar el comentari <b>{comentariSeleccionat && comentariSeleccionat.ID_COMENTARI}?</b> </h4>
             <div align="right" style={inputMaterial}>
-                <Button color="primary" onClick={() => deleteTipus()}>Sí</Button>
+                <Button color="primary" onClick={() => deleteComentari()}>Sí</Button>
                 <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>
             </div>
 
@@ -152,8 +152,8 @@ const CrudTipusAllotjaments = () => {
     return (
         <div>
             <br />
-            <h1>Crud Idiomes</h1>
-            <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button>
+            <h1>Crud Comentaris</h1>
+            {/* <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button> */}
             <br /><br />
             <TableContainer>
                 <Table>
@@ -167,28 +167,28 @@ const CrudTipusAllotjaments = () => {
                     </TableHead>
 
                     <TableBody>
-                        {data.map((tipus) => (
-                            <TableRow key={tipus.ID_TIPUS}>
-                                {Object.entries(tipus).map(([key, value]) => (
+                        {data.map((comentari) => (
+                            <TableRow key={comentari.ID_COMENTARI}>
+                                {Object.entries(comentari).map(([key, value]) => (
                                     <TableCell
-                                        key={`${tipus.ID_TIPUS}_${key}`}
+                                        key={`${comentari.ID_COMENTARI}_${key}`}
                                     >
                                         {value}
                                     </TableCell>
                                 ))}
                                 <TableCell>
-                                    <Edit style={cursorPointer} onClick={() => seleccionarTipus(tipus, 'Editar')} />
+                                    <Edit style={cursorPointer} onClick={() => seleccionarComentari(comentari, 'Editar')} />
                                     &nbsp;&nbsp;
-                                    <Delete style={cursorPointer} onClick={() => seleccionarTipus(tipus, 'Eliminar')} />
+                                    <Delete style={cursorPointer} onClick={() => seleccionarComentari(comentari, 'Eliminar')} />
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Modal open={modalInsertar} onClose={abrirCerrarModalInsertar}>
+            {/* <Modal open={modalInsertar} onClose={abrirCerrarModalInsertar}>
                 {bodyInsertar}
-            </Modal>
+            </Modal> */}
             <Modal
                 open={modalEditar}
                 onClose={abrirCerrarModalEditar}>
@@ -203,4 +203,4 @@ const CrudTipusAllotjaments = () => {
     )
 }
 
-export default CrudTipusAllotjaments;
+export default CrudComentaris;

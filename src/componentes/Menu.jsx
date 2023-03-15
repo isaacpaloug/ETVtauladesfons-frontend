@@ -33,6 +33,10 @@ function Menu() {
                     <Link className="nav-link" to="/contacte">
                         Contacte
                     </Link>
+
+                    <Link className="nav-link" to="/usuaris">
+                        Usuaris
+                    </Link>
                     {isAdmin && (
                         <>
                             <Link className="nav-link" to="/CRUDallotjaments">

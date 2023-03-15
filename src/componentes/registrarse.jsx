@@ -37,7 +37,7 @@ function Registro() {
     };
 
     return (
-        <div>
+        <div className="container">
             <Form onSubmit={handleFormSubmit}>
                 <Form.Group controlId="nomComplet">
                     <Form.Label>Nom complet:</Form.Label>
@@ -63,7 +63,7 @@ function Registro() {
                     <Form.Label>Telèfon:</Form.Label>
                     <Form.Control type="tel" placeholder="Telèfon" value={telefon} onChange={(event) => setTelefon(event.target.value)} />
                 </Form.Group>
-
+                <br/>
                 <Button variant="primary" type="submit">
                     Registrar-se
                 </Button>

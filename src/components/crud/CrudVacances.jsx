@@ -151,7 +151,7 @@ const CrudVacances = () => {
     return (
         <div>
             <br />
-            <h1>Crud Idiomes</h1>
+            <h1>Crud Vacances</h1>
             <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button>
             <br /><br />
             <TableContainer>

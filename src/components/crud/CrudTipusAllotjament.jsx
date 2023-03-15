@@ -152,7 +152,7 @@ const CrudTipusAllotjaments = () => {
     return (
         <div>
             <br />
-            <h1>Crud Idiomes</h1>
+            <h1>Crud Tipus Allotjaments</h1>
             <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button>
             <br /><br />
             <TableContainer>

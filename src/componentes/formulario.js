@@ -16,7 +16,7 @@ function ContactForm() {
     }
 
     return (
-        <div>
+        <div className='container'>
             <h1>Contacta amb Nosaltres</h1>
             <br />
             <Form onSubmit={handleSubmit}>
@@ -51,6 +51,7 @@ function ContactForm() {
                         required
                     />
                 </Form.Group>
+                <br/>
                 <Button variant="primary" type="submit">
                     Envia
                 </Button>

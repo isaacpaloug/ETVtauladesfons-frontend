@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Navbar, Nav, Container, Modal } from "react-bootstrap";
+import { Navbar, Nav, Modal } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import LoginForm from "./login";
 import Cookies from "js-cookie";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { MDBFooter, MDBContainer, MDBIcon, MDBInput, MDBCol, MDBRow, MDBBtn } from 'mdb-react-ui-kit';
 
 function Menu() {
     const [showLoginModal, setShowLoginModal] = useState(false);
@@ -20,53 +22,25 @@ function Menu() {
         <>
             <Navbar bg="dark" className="color-nav" variant="dark" expand="sm" sticky="top">
                 <Nav className="mr-auto">
-                    <Link className="nav-link" to="/inici">
-                        Inici
-                    </Link>
-                    <Link className="nav-link" to="/llista">
-                        Llista allotjaments
-                    </Link>
+                    <Link className="nav-link" to="/inici">Inici</Link>
+                    <Link className="nav-link" to="/allotjaments">Allotjaments</Link>
                     <Nav.Link onClick={handleShowLoginModal}>Login</Nav.Link>
-                    <Link className="nav-link" to="/registrarse">
-                        Registre Usuari nou
-                    </Link>
-                    <Link className="nav-link" to="/contacte">
-                        Contacte
-                    </Link>
+                    <Link className="nav-link" to="/contacte">Contacte</Link>
                     {isAdmin && (
                         <>
-                            <Link className="nav-link" to="/CRUDallotjaments">
-                                CRUDAllotjaments
-                            </Link>
-                            <Link className="nav-link" to="/CRUDVacances">
-                                CRUDVacances
-                            </Link>
-                            <Link className="nav-link" to="/CRUDIdiomes">
-                                CRUDIdiomes
-                            </Link>
-                            <Link className="nav-link" to="/CRUDTipus">
-                                CRUDTipusAllotjaments
-                            </Link>
-                            <Link className="nav-link" to="/CRUDServeis">
-                                CRUDServeis
-                            </Link>
-                            <Link className="nav-link" to="/CRUDCategories">
-                                CRUDCategories
-                            </Link>
-                            <Link className="nav-link" to="/CRUDComentaris">
-                                CRUDComentaris
-                            </Link>
-                            <Link className="nav-link" to="/DSTCAllotjaments">
-                                DESTCAllotjaments
-                            </Link>
-                            <Link className="nav-link" to="/CRUDusuaris">
-                                CRUDUsuaris
-                            </Link>
+                            <Link className="nav-link" to="/adminMenu"><AdminPanelSettingsIcon />Admin</Link>
                         </>
                     )}
                 </Nav>
             </Navbar>
+            <MDBFooter className='text-center' color='white' bgColor='dark' style={{ position: "fixed", bottom: 0, width: "100%" }}>
+                <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+                    © {new Date().getFullYear()} Copyright: 
+                    <a className='text-white' href='http://etvtauladesfons.com/etvclient'>EtvClient</a>
+                </div>
+            </MDBFooter>
             <Outlet />
+
             <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>

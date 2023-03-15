@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Alert } from "react-bootstrap";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -79,7 +80,6 @@ function LoginForm() {
             )}
             {!showMessage && !isLoggedIn && (
                 <div>
-                    <h2>Login</h2>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="email">
                             <Form.Label>Email address</Form.Label>
@@ -100,10 +100,11 @@ function LoginForm() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </Form.Group>
-
+                        <br/>
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
+                        <Link to={'/registre'}>Registrate</Link>
 
                         {showError && (
                             <Alert variant="danger">Invalid email or password</Alert>

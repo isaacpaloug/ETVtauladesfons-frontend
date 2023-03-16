@@ -6,19 +6,19 @@ import Registro from "./componentes/registrarse";
 import ContactForm from "./componentes/formulario";
 import CrudAllotjaments from "./components/crud/Allotjaments";
 import AllotjamentsList from "./componentes/LlistaAllotjaments";
-import Benvinguda from "./componentes/Benvinguda";
 import CrudVacances from "./components/crud/CrudVacances";
 import CrudIdiomes from "./components/crud/CrudIdiomes";
 import CrudTipusAllotjaments from "./components/crud/CrudTipusAllotjament";
 import CrudServeis from "./components/crud/CrudServeis";
 import CrudCategories from "./components/crud/CrudCategoria";
 import CrudComentaris from "./components/crud/CrudComentaris";
-import DestcAllotjaments from "./components/crud/DestacAllotjament";
 import CrudUsuaris from "./components/crud/CrudUsuaris";
 import ProtectedRoutesAdmin from './components/protect/ProtectedRoutesAdmin';
 import Inici from "./componentes/Inici";
 import AdminSelect from "./components/protect/AdminRoutes";
 import AllotjamentInfo from "./componentes/allotjamentInfo";
+import NoAdminRoutes from "./components/protect/NoAdminRoutes";
+import Usuaris from "./components/usuaris/usuaris";
 
 
 function App() {
@@ -31,6 +31,10 @@ function App() {
           <Route path="/allotjaments" element={<AllotjamentsList />} />
           <Route path="/registre" element={<Registro />} />
           <Route path="/contacte" element={<ContactForm />} />
+          <Route path="/allotjament/:id" element={<AllotjamentInfo />} />
+          <Route element={<NoAdminRoutes />} >
+            <Route path="/usuari" element={<Usuaris />} />
+          </Route>
           <Route element={<ProtectedRoutesAdmin />} >
             <Route element={<AdminSelect />} path="/adminMenu" />
             <Route element={<CrudAllotjaments />} path="/crudallotjaments" />
@@ -44,7 +48,6 @@ function App() {
             <Route element={<CrudTipusAllotjaments />} path="/crudtipusallot" />
             <Route element={<CrudVacances />} path="/crudvacances" />
             <Route element={<CrudComentaris />} path="/crudcomentaris" />
-            <Route path="/allotjament/:id" element={<AllotjamentInfo />} />
           </Route>
         </Route>
       </Routes>

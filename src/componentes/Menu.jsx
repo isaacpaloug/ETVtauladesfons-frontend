@@ -16,7 +16,7 @@ function Menu() {
     };
 
     const isAdmin = Cookies.get("isAdmin") === "true";
-    const token = Cookies.get("token") === "true";
+    const token = Cookies.get("token");
 
     return (
         <>
@@ -26,6 +26,12 @@ function Menu() {
                     <Link className="nav-link" to="/allotjaments">Allotjaments</Link>
                     <Nav.Link onClick={handleShowLoginModal}>Login</Nav.Link>
                     <Link className="nav-link" to="/contacte">Contacte</Link>
+                    {token && (
+                        <>
+                            <Link className="nav-link" to="/reserves">Reserves</Link>
+                            <Link className="nav-link" to="/usuari">Usuari</Link>
+                        </>
+                    )}
                     {isAdmin && (
                         <>
                             <Link className="nav-link" to="/adminMenu"><AdminPanelSettingsIcon />Admin</Link>
@@ -35,12 +41,11 @@ function Menu() {
             </Navbar>
             <MDBFooter className='text-center' color='white' bgColor='dark' style={{ position: "fixed", bottom: 0, width: "100%" }}>
                 <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                    © {new Date().getFullYear()} Copyright: 
+                    © {new Date().getFullYear()} Copyright:
                     <a className='text-white' href='http://etvtauladesfons.com/etvclient'>EtvClient</a>
                 </div>
             </MDBFooter>
             <Outlet />
-
             <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>

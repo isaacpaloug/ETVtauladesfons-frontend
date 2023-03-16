@@ -121,13 +121,13 @@ const CrudUsuaris = () => {
             <br />
             <h3 align="center">Afegir un nou usuari</h3>
             <br />
-            <TextField name='DNI' style={inputMaterial} label="Dni" onChange={handleChange} />
+            <TextField name='DNI' style={inputMaterial} label="DNI" onChange={handleChange} />
             <br />
-            <TextField name='NOM_COMPLET' style={inputMaterial} label="Num Registre" onChange={handleChange} />
+            <TextField name='NOM_COMPLET' style={inputMaterial} label="Nom Complet" onChange={handleChange} />
             <br />
-            <TextField name='CORREU_ELECTRONIC' style={inputMaterial} label="Correu Electronic" onChange={handleChange} />
+            <TextField name='CORREU_ELECTRONIC' style={inputMaterial} label="Correu Electrònic" onChange={handleChange} />
             <br />
-            <TextField name='TELEFON' style={inputMaterial} label="Telefon" onChange={handleChange} />
+            <TextField name='TELEFON' style={inputMaterial} label="Telèfon" onChange={handleChange} />
             <br />
             <div align="right">
                 <Button variant="contained" color="primary" onClick={() => insertUsuari()}>Insertar</Button>

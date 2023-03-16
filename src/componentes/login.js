@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Alert } from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -16,19 +16,12 @@ function LoginForm() {
     useEffect(() => {
         // Comprobamos si hay un token almacenado en la cookie
         const token = Cookies.get("token");
-        if (token) {
-            setIsLoggedIn(true);
-        }
-    }, []);
-    useEffect(() => {
-        // Comprobar si hay una cookie válida al cargar la página
-        const token = Cookies.get("token");
-        const isAdmin = Cookies.get("isAdmin");
+        const admin = Cookies.get("isAdmin") === "true"; // Parse the string as boolean
 
         if (token) {
             setIsLoggedIn(true);
             setShowMessage(true);
-            setIsAdmin(isAdmin);
+            setIsAdmin(admin); // Set the isAdmin state based on the parsed boolean
         }
     }, []);
 
@@ -40,13 +33,15 @@ function LoginForm() {
                 CONTRASENYA: password,
             })
             .then((response) => {
-                // Almacenamos el token en una cookie
+                // Almacenamos el token y el valor de administrador en una cookie
+                const admin = response.data.data.ADMINISTRADOR === 1;
                 Cookies.set("token", response.data.data.TOKEN, { expires: 10 });
-                Cookies.set("isAdmin", response.data.data.ADMINISTRADOR === 1, { expires: 10 });
-                // Actualizamos el estado de isLoggedIn
+                Cookies.set("isAdmin", admin, { expires: 10 });
+
+                // Actualizamos el estado de isLoggedIn y isAdmin
                 setIsLoggedIn(true);
                 setShowMessage(true);
-                setIsAdmin(response.data.data.ADMINISTRADOR === 1);
+                setIsAdmin(admin);
 
                 console.log(response.data.data.TOKEN);
                 console.log(response.data.data.ADMINISTRADOR);
@@ -55,7 +50,6 @@ function LoginForm() {
                 console.log(error);
                 setShowError(true);
             });
-
     };
 
     const handleLogout = () => {
@@ -74,7 +68,10 @@ function LoginForm() {
         <div>
             {showMessage && isLoggedIn && (
                 <div>
-                    <h1>Benvingut{isAdmin ? ' administrador' : ''}, has iniciat sessió correctament</h1>
+                    <h1>
+                        Benvingut{isAdmin ? " administrador" : ""}, has iniciat sessió
+                        correctament
+                    </h1>
                     <Button onClick={handleLogout}>Logout</Button>
                 </div>
             )}

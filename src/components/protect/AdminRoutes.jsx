@@ -21,6 +21,7 @@ function AdminSelect(){
         {text: "Usuaris", path: "/crudusuaris"},
         {text: "Valoracions", path: "/crudvaloracions"},
         {text: "Comentaris", path: "/crudcomentaris"},
+        {text: "Destacar Allot.", path: "/destcallotjaments"},
     ];
 
     return (

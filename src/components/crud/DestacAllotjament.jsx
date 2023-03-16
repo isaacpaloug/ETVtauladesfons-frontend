@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, TableContainer, TableHead, TableCell, TableBody, TableRow, Button, TextField, TablePagination } from '@mui/material';
 import { Modal } from '@mui/material'
-import { Edit, Delete } from '@mui/icons-material';
+import { Edit } from '@mui/icons-material';
 import Cookies from 'js-cookie';
 
 
@@ -34,7 +34,6 @@ const inputMaterial = {
 const DestcAllotjaments = () => {
 
     const [data, setData] = useState([]);
-    // const [modalInsertar, setModalInsertar] = useState(false);
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
     const token = Cookies.get('token');
@@ -62,10 +61,6 @@ const DestcAllotjaments = () => {
         getAllotjaments()
     }, [])
 
-    // HOOKS DE MODAL
-    // const abrirCerrarModalInsertar = () => {
-    //     setModalInsertar(!modalInsertar);
-    // }
     const abrirCerrarModalEditar = () => {
         setModalEditar(!modalEditar);
     }
@@ -87,67 +82,15 @@ const DestcAllotjaments = () => {
             .catch((error) => console.log(error));
     }
 
-    // // ! POST
-    // const insertAllotjament = async () => {
-    //     await axios.post(REST_URL, allotjamentSeleccionat, config)
-    //         .then(response => {
-    //             setData(data.concat(response.data.data))
-    //             abrirCerrarModalInsertar()
-    //             window.location.reload(true);
-    //         })
-    // }
     // ! PUT
     const updateAllotjament = async () => {
-        await axios.put(REST_URL + '/put/' + allotjamentSeleccionat.ID_ALLOTJAMENT, allotjamentSeleccionat, config)
+        await axios.put(REST_URL + '/put/destacat/' + allotjamentSeleccionat.ID_ALLOTJAMENT, allotjamentSeleccionat, config)
             .then(response => {
                 abrirCerrarModalEditar();
                 getAllotjaments();
             })
     }
-    // // ! DELETE
-    // const deleteAllotjament = async () => {
-    //     await axios.delete(REST_URL + "/destroy/" + allotjamentSeleccionat.ID_ALLOTJAMENT, config)
-    //         .then(response => {
-    //             setData();
-    //             abrirCerrarModalEliminar();
-    //             window.location.reload(false);
-    //         })
-    // }
-    // // Body Insertar
-    // const bodyInsertar = (
-    //     <div style={modalStyle}>
-    //         <br />
-    //         <h3 align="center">Afegir un nou allotjament</h3>
-    //         <br />
-    //         <TextField name='NOM_COMERCIAL' style={inputMaterial} label="Nom Comercial" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='NUM_REGISTRE' style={inputMaterial} label="Num Registre" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='DESCRIPCIO' style={inputMaterial} label="Descripcio" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='LLITS' style={inputMaterial} label="Llits" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='PERSONES' style={inputMaterial} label="Persones" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='BANYS' style={inputMaterial} label="Banys" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='ADREÇA' style={inputMaterial} label="Adreça" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='FK_ID_MUNICIPI' style={inputMaterial} label="Fk_ID_Municipi" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='FK_ID_TIPUS' style={inputMaterial} label="Fk_ID_Tipus" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='FK_ID_VACANCES' style={inputMaterial} label="Fk_ID_Vacances" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='FK_ID_CATEGORIA' style={inputMaterial} label="Fk_ID_Categoria" onChange={handleChange} />
-    //         <br />
-    //         <TextField name='FK_ID_USUARI' style={inputMaterial} label="Fk_ID_Usuari" onChange={handleChange} />
-    //         <div align="right">
-    //             <Button variant="contained" color="primary" onClick={() => insertAllotjament()}>Insertar</Button>
-    //             <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
-    //         </div>
-    //     </div>
-    // );
+
     // Body Editar
     const bodyEditar = (
         <div style={modalStyle}>
@@ -163,41 +106,11 @@ const DestcAllotjaments = () => {
             </div>
         </div>
     );
-    // const bodyEliminar = (
-    //     <div style={modalStyle}>
-    //         <br />
-    //         <h4 align="center">Estàs segur de que vols eliminar l'allotjament <b>{allotjamentSeleccionat && allotjamentSeleccionat.NOM_COMERCIAL}</b>?</h4>
-    //         <div align="right" style={inputMaterial}>
-    //             <Button color="primary" onClick={() => deleteAllotjament()}>Sí</Button>
-    //             <Button color="secondary" onClick={() => abrirCerrarModalEliminar()}>No</Button>
-    //         </div>
 
-        // </div>
-    // )
-    // const [page, setPage] = useState(0);
-    // const [rowsPerPage, setRowsPerPage] = useState(10);
-    // const startIndex = page * rowsPerPage;
-    // const endIndex = startIndex + rowsPerPage;
-    // const paginatedList = data.slice(startIndex, endIndex);
-
-    // const handleChangePage = (
-    //     event: React.MouseEvent<HTMLButtonElement> | null,
-    //     newPage: number,
-    // ) => {
-    //     setPage(newPage);
-    // };
-
-    // const handleChangeRowsPerPage = (
-    //     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    // ) => {
-    //     setRowsPerPage(parseInt(event.target.value, 10));
-    //     setPage(0);
-    // };
     return (
         <div>
             <br />
             <h1>Destacar Allotjaments</h1>
-            {/* <Button onClick={() => abrirCerrarModalInsertar()}>Insertar</Button> */}
             <br /><br />
             <TableContainer>
                 <Table>
@@ -223,7 +136,6 @@ const DestcAllotjaments = () => {
                                 <TableCell>
                                     <Edit style={cursorPointer} onClick={() => seleccionarAllotjament(allotjament, 'Editar')} />
                                     &nbsp;&nbsp;
-                                    {/* <Delete style={cursorPointer} onClick={() => seleccionarAllotjament(allotjament, 'Eliminar')} /> */}
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -246,11 +158,6 @@ const DestcAllotjaments = () => {
                 onClose={abrirCerrarModalEditar}>
                 {bodyEditar}
             </Modal>
-            {/* <Modal
-                open={modalEliminar}
-                onClose={abrirCerrarModalEliminar}>
-                {bodyEliminar}
-            </Modal> */}
         </div>
     )
 }

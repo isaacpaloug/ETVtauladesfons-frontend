@@ -19,6 +19,7 @@ import AdminSelect from "./components/protect/AdminRoutes";
 import AllotjamentInfo from "./componentes/allotjamentInfo";
 import NoAdminRoutes from "./components/protect/NoAdminRoutes";
 import Usuaris from "./components/usuaris/usuaris";
+import DestcAllotjaments from "./components/crud/DestacAllotjament";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
             <Route element={<CrudTipusAllotjaments />} path="/crudtipusallot" />
             <Route element={<CrudVacances />} path="/crudvacances" />
             <Route element={<CrudComentaris />} path="/crudcomentaris" />
+            <Route element={<DestcAllotjaments />} path="/destcallotjaments" />
           </Route>
         </Route>
       </Routes>

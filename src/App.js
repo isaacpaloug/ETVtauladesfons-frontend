@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import Registro from "./componentes/registrarse";
 import ContactForm from "./componentes/formulario";
 import CrudAllotjaments from "./components/crud/Allotjaments";
-import Carrusel from "./componentes/Carrusel";
 import AllotjamentsList from "./componentes/LlistaAllotjaments";
 import Benvinguda from "./componentes/Benvinguda";
 import CrudVacances from "./components/crud/CrudVacances";
@@ -19,6 +18,8 @@ import CrudUsuaris from "./components/crud/CrudUsuaris";
 import ProtectedRoutesAdmin from './components/protect/ProtectedRoutesAdmin';
 import Inici from "./componentes/Inici";
 import AdminSelect from "./components/protect/AdminRoutes";
+import AllotjamentInfo from "./componentes/allotjamentInfo";
+
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route element={<CrudTipusAllotjaments />} path="/crudtipusallot" />
             <Route element={<CrudVacances />} path="/crudvacances" />
             <Route element={<CrudComentaris />} path="/crudcomentaris" />
+            <Route path="/allotjament/:id" element={<AllotjamentInfo />} />
           </Route>
         </Route>
       </Routes>

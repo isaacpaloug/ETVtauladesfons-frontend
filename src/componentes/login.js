@@ -37,6 +37,7 @@ function LoginForm() {
                 const admin = response.data.data.ADMINISTRADOR === 1;
                 Cookies.set("token", response.data.data.TOKEN, { expires: 10 });
                 Cookies.set("isAdmin", admin, { expires: 10 });
+                Cookies.set("ID_USUARI", response.data.data.ID_USUARI, { expires: 10 }); // Almacenar ID_USUARI en la cookie
 
                 // Actualizamos el estado de isLoggedIn y isAdmin
                 setIsLoggedIn(true);
@@ -45,6 +46,8 @@ function LoginForm() {
 
                 console.log(response.data.data.TOKEN);
                 console.log(response.data.data.ADMINISTRADOR);
+                console.log(response.data.data.ID_USUARI); // Imprimir ID_USUARI en la consola
+
             })
             .catch((error) => {
                 console.log(error);
@@ -57,6 +60,8 @@ function LoginForm() {
             // Borrar la cookie
             Cookies.remove("token");
             Cookies.remove("isAdmin");
+            Cookies.remove("ID_USUARI"); // Eliminar ID_USUARI de la cookie
+
 
             // Actualizar el estado de isLoggedIn
             setIsLoggedIn(false);

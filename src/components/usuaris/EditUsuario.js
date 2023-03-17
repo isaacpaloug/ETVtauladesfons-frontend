@@ -1,27 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
+const EditUsuario = () => {
+    const navigate = useNavigate();
+    const userID = Cookies.get("ID_USUARI");
+    const token = Cookies.get("token");
+    const [userData, setUserData] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-const Usuario = ({ usuario }) => {
-    const [userData, setUserData] = useState({
-        DNI: usuario.DNI,
-        NOM_COMPLET: usuario.NOM_COMPLET,
-        CORREU_ELECTRONIC: usuario.CORREU_ELECTRONIC,
-        CONTRASENYA: usuario.CONTRASENYA,
-        TELEFON: usuario.TELEFON,
-    });
+    useEffect(() => {
+        axios
+            .get(`http://www.etvtauladesfons.com/api/usuaris/${userID}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setUserData({ DNI: response.data.data.DNI, NOM_COMPLET: response.data.data.NOM_COMPLET, CORREU_ELECTRONIC: response.data.data.CORREU_ELECTRONIC, CONTRASENYA: "", TELEFON: response.data.data.TELEFON });
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(error);
+                setLoading(false);
+            });
+    }, [userID, token]);
 
     const handleChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
 
     const handleSave = async () => {
-        const token = Cookies.get("token");
         try {
             const response = await axios.put(
-                `http://www.etvtauladesfons.com/api/usuaris/put/${usuario.ID_USUARI}`,
+                `http://www.etvtauladesfons.com/api/usuaris/put/${userID}`,
                 userData,
                 {
                     headers: {
@@ -30,15 +45,23 @@ const Usuario = ({ usuario }) => {
                 }
             );
             if (response.data.status === "error") {
-                console.error(response.data.message);
+                setError(response.data.message);
             } else {
-                console.log("Datos actualizados correctamente");
+                navigate("/inici");
+                
             }
         } catch (error) {
-            console.error("Error al actualizar los datos", error);
+            setError(error);
         }
     };
 
+    if (loading) {
+        return <p>Cargando datos...</p>;
+    }
+
+    if (error) {
+        return <p>Error al cargar los datos del usuario</p>;
+    }
     return (
         <Container>
             <Row>
@@ -75,6 +98,7 @@ const Usuario = ({ usuario }) => {
                             <Form.Label>Contraseña:</Form.Label>
                             <Form.Control
                                 type="password"
+                                placeholder="password"
                                 name="CONTRASENYA"
                                 value={userData.CONTRASENYA}
                                 onChange={handleChange}
@@ -89,7 +113,7 @@ const Usuario = ({ usuario }) => {
                                 onChange={handleChange}
                             />
                         </Form.Group>
-                        <br/>
+                        <br />
                         <Button variant="primary" onClick={handleSave}>
                             Guardar cambios
                         </Button>
@@ -100,4 +124,4 @@ const Usuario = ({ usuario }) => {
     );
 };
 
-export default Usuario;
+export default EditUsuario;

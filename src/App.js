@@ -21,6 +21,8 @@ import NoAdminRoutes from "./components/protect/NoAdminRoutes";
 import Usuaris from "./components/usuaris/usuaris";
 import DestcAllotjaments from "./components/crud/DestacAllotjament";
 import BarraCerca from "./componentes/BarraCerca";
+import UploadFotos from "./componentes/uploadfotografies";
+import Comentario from "./componentes/comentaris";
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
           <Route path="/allotjament/:id" element={<AllotjamentInfo />} />
           <Route element={<NoAdminRoutes />} >
             <Route path="/usuari" element={<Usuaris />} />
+            <Route path="/upload" element={<UploadFotos />} />
+            <Route path="/comentaris" element={<Comentario />} />
           </Route>
           <Route element={<ProtectedRoutesAdmin />} >
             <Route element={<AdminSelect />} path="/adminMenu" />

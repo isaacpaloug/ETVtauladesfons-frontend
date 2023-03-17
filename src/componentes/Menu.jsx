@@ -32,6 +32,8 @@ function Menu() {
                         <>
                             <Link className="nav-link" to="/reserves">Reserves</Link>
                             <Link className="nav-link" to="/usuari">Usuari</Link>
+                            <Link className="nav-link" to="/upload">Upload</Link>
+                            <Link className="nav-link" to="/comentaris">Comentaris</Link>
                         </>
                     )}
                     {isAdmin && (

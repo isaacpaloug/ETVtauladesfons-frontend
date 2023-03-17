@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ReactPaginate from 'react-paginate';
 import Select from 'react-select';
 
 const BarraCerca = () => {
     const [allotjaments, setAllotjaments] = useState([]);
-    // const [pageNumber, setPageNumber] = useState(0);
-    // const itemsPerPage = 5;
-    // const pagesVisited = pageNumber * itemsPerPage;
     const filterOptions = [
         { value: 'NOM_COMERCIAL', label: 'Nom Comercial' },
         { value: 'DESCRIPCIO', label: 'Descripció' },
@@ -66,12 +62,6 @@ const BarraCerca = () => {
         fetchData();
     }, []);
 
-    // const pageCount = Math.ceil(filteredAllotjaments.length / itemsPerPage);
-
-    // const changePage = ({ selected }) => {
-    //     setPageNumber(selected);
-    // };
-
     return (
         <>
         <h2 className="mb-3">Cerca Allotjaments</h2>
@@ -114,7 +104,6 @@ const BarraCerca = () => {
                 </thead>
                 <tbody>
                 {filteredAllotjaments
-                    // .slice(pagesVisited, pagesVisited + itemsPerPage)
                     .map((allotjament) => (
                         <tr key={allotjament.ID_ALLOTJAMENT}>
                             <td>{allotjament.NOM_COMERCIAL}</td>

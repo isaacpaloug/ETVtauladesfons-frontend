@@ -10,7 +10,7 @@ function Inici(){
 
     return(
         <>
-        <div>
+        <div> 
             <br/>
             <h1 style={mystyle}>HOSPEDATJE TAULA DES FONS</h1>
             <br/>

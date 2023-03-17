@@ -3,6 +3,10 @@ import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+const modalStyle = {
+    backgroundColor: '#f5f5f5',
+    color: 'black',
+};
 function Carrusel() {
     const [imatges, setImatges] = useState([]);
     const [allotjamentsDestacats, setAllotjamentsDestacats] = useState([]);
@@ -32,7 +36,8 @@ function Carrusel() {
     };
 
     return (
-        <Carousel>
+        <Carousel prevIcon={<span className="carousel-control-prev-icon" style={{ filter: 'invert(100%)' }} />}
+            nextIcon={<span className="carousel-control-next-icon" style={{ filter: 'invert(100%)' }} />}>
             {imatges.map((imatge) => (
                 <Carousel.Item key={imatge.ID_FOTO}>
                     <Link to={`/allotjament/${imatge.FK_ID_ALLOTJAMENT}`}>
@@ -44,7 +49,7 @@ function Carrusel() {
                         />
                     </Link>
                     <Carousel.Caption>
-                        <h3>{getNomAllotjament(imatge.FK_ID_ALLOTJAMENT)}</h3>
+                        <h3 style={modalStyle}>{getNomAllotjament(imatge.FK_ID_ALLOTJAMENT)}</h3>
                     </Carousel.Caption>
                 </Carousel.Item>
             ))}

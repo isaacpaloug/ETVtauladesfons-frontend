@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Navbar, Nav, Modal, Input } from "react-bootstrap";
+import { Navbar, Nav, Modal, Input, Container } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import LoginForm from "./login";
 import Cookies from "js-cookie";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import { MDBFooter, MDBContainer, MDBIcon, MDBInput, MDBCol, MDBRow, MDBBtn } from 'mdb-react-ui-kit';
+import { MDBFooter } from 'mdb-react-ui-kit';
 import BarraCerca from "./BarraCerca";
 
 
@@ -43,13 +43,16 @@ function Menu() {
                     )}
                 </Nav>
             </Navbar>
-            <MDBFooter className='text-center' color='white' bgColor='dark' style={{ position: "fixed", bottom: 0, width: "100%" }}>
+
+            <Container>
+                <Outlet />
+            </Container>
+            <MDBFooter className='text-center' color='white' bgColor='dark' style={{ position: "relative", bottom: 0, width: "100%" }}>
                 <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-                    © {new Date().getFullYear()} Copyright:
+                    © {new Date().getFullYear()}:
                     <a className='text-white' href='http://etvtauladesfons.com/etvclient'>EtvClient</a>
                 </div>
             </MDBFooter>
-            <Outlet />
             <Modal show={showLoginModal} onHide={handleCloseLoginModal}>
                 <Modal.Header closeButton>
                     <Modal.Title>Login</Modal.Title>

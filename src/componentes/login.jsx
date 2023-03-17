@@ -43,10 +43,7 @@ function LoginForm() {
                 setIsLoggedIn(true);
                 setShowMessage(true);
                 setIsAdmin(admin);
-
-                console.log(response.data.data.TOKEN);
-                console.log(response.data.data.ADMINISTRADOR);
-                console.log(response.data.data.ID_USUARI); // Imprimir ID_USUARI en la consola
+                console.log(response.data.data); // Imprimir ID_USUARI en la consola
 
             })
             .catch((error) => {
@@ -55,19 +52,21 @@ function LoginForm() {
             });
     };
 
-    const handleLogout = () => {
-        if (window.confirm("¿Estas segur de voler fer logout?")) {
-            // Borrar la cookie
-            Cookies.remove("token");
-            Cookies.remove("isAdmin");
-            Cookies.remove("ID_USUARI"); // Eliminar ID_USUARI de la cookie
-
-
-            // Actualizar el estado de isLoggedIn
+    const handleLogout = async () => {
+        if (!window.confirm("¿Está seguro de querer cerrar sesión?")) return;
+        try {
+            const tokenApi = Cookies.get("token");
+            await axios.post("http://www.etvtauladesfons.com/api/logout", null, {
+                headers: { Authorization: `Bearer ${tokenApi}` },
+            });
+            ["token", "isAdmin", "ID_USUARI"].forEach((cookie) => Cookies.remove(cookie));
             setIsLoggedIn(false);
             setShowMessage(false);
+        } catch (error) {
+            console.error(error);
         }
     };
+
 
     return (
         <div>
@@ -102,7 +101,7 @@ function LoginForm() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </Form.Group>
-                        <br/>
+                        <br />
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>

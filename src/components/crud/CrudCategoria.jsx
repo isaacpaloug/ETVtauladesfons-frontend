@@ -38,18 +38,17 @@ const CrudCategories = () => {
     const [modalEditar, setModalEditar] = useState(false);
     const [modalEliminar, setModalEliminar] = useState(false);
     const token = Cookies.get('token');
-    const adminCookie = Cookies.get('isAdmin');
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     };
-    const [categoriaSeleccionada, setcategoriaSeleccionada] = useState({
+    const [categoriaSeleccionada, setCategoriaSeleccionada] = useState({
         NOM_CATEGORIA: '',
     })
     const handleChange = e => {
         const { name, value } = e.target;
-        setcategoriaSeleccionada(prevState => ({
+        setCategoriaSeleccionada(prevState => ({
             ...prevState,
             [name]: value
         }))
@@ -71,7 +70,7 @@ const CrudCategories = () => {
     }
 
     const seleccionarCategoria = (categoria, caso) => {
-        setcategoriaSeleccionada(categoria);
+        setCategoriaSeleccionada(categoria);
         (caso === 'Editar') ? abrirCerrarModalEditar() : abrirCerrarModalEliminar()
     }
 

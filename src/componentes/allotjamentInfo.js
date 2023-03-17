@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import PersonIcon from '@mui/icons-material/Person';
+import HotelIcon from '@mui/icons-material/Hotel';
+import ShowerIcon from '@mui/icons-material/Shower';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import StarRateIcon from '@mui/icons-material/StarRate';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
 
 function AllotjamentInfo() {
-    const [allotjament, setAllotjament] = useState(null);
-    const [municipi, setMunicipi] = useState(null);
+    const [allotjament, setAllotjament] = useState([]);
+    const [municipi, setMunicipi] = useState([]);
+    const [tipusAllot, setTipusAllot] = useState([]);
+    const [vacances, setVacances] = useState([]);
+    const [categoria, setCategoria] = useState([]);
     const { id } = useParams();
 
     useEffect(() => {
@@ -16,6 +25,9 @@ function AllotjamentInfo() {
                 const responseMunicipi = await axios.get(`http://www.etvtauladesfons.com/api/municipis/${response.data.data.FK_ID_MUNICIPI}`);
                 setMunicipi(responseMunicipi.data.data);
 
+                const responseTipusAllot = await axios.get(`http://www.etvtauladesfons.com/api/tipus/${response.data.data.FK_ID_TIPUS}`);
+                setTipusAllot(responseTipusAllot.data.data);
+
             } catch (error) {
                 console.error('Error al obtener la información del alojamiento', error);
             }
@@ -23,20 +35,21 @@ function AllotjamentInfo() {
         fetchData();
     }, [id]);
 
-    if (!allotjament || !municipi) {
+    if (!allotjament || !municipi || !tipusAllot || !vacances || !categoria) {
         return <div>Cargando información del alojamiento...</div>;
     }
 
     return (
         <div>
             <h1>{allotjament.NOM_COMERCIAL}</h1>
-            <p>Descripción: {allotjament.DESCRIPCIO}</p>
-            <p>Llits: {allotjament.LLITS}</p>
-            <p>Persones: {allotjament.PERSONES}</p>
-            <p>Banys: {allotjament.BANYS}</p>
-            <p>Adreça: {allotjament.ADREÇA}</p>
-            <p>Valoración global: {allotjament.VALORACIO_GLOBAL}</p>
-            <p>Municipi: {municipi.NOM_MUNICIPI}</p>
+            <h5>{allotjament.DESCRIPCIO}</h5>
+            <p><HotelIcon/> &nbsp;Llits: {allotjament.LLITS}</p>
+            <p><PersonIcon/>&nbsp;Persones: {allotjament.PERSONES}</p>
+            <p><ShowerIcon/>&nbsp;Banys: {allotjament.BANYS}</p>
+            <p><LocationOnIcon/>&nbsp;Adreça: {allotjament.ADREÇA}</p>
+            <p><StarRateIcon/>&nbsp;Valoració: {allotjament.VALORACIO_GLOBAL}</p>
+            <p><LocationCityIcon/>&nbsp;Municipi: {municipi.NOM_MUNICIPI}</p>
+            <p>Tipus: {tipusAllot.NOM_TIPUS}</p>
             {/* Agrega aquí más campos si es necesario */}
         </div>
     );

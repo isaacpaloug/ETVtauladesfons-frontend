@@ -20,6 +20,7 @@ import AllotjamentInfo from "./componentes/allotjamentInfo";
 import NoAdminRoutes from "./components/protect/NoAdminRoutes";
 import Usuaris from "./components/usuaris/usuaris";
 import DestcAllotjaments from "./components/crud/DestacAllotjament";
+import BarraCerca from "./componentes/BarraCerca";
 
 
 function App() {

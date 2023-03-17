@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { Navbar, Nav, Modal } from "react-bootstrap";
+import { Navbar, Nav, Modal, Input } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import LoginForm from "./login";
 import Cookies from "js-cookie";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { MDBFooter, MDBContainer, MDBIcon, MDBInput, MDBCol, MDBRow, MDBBtn } from 'mdb-react-ui-kit';
+import BarraCerca from "./BarraCerca";
+
 
 function Menu() {
     const [showLoginModal, setShowLoginModal] = useState(false);

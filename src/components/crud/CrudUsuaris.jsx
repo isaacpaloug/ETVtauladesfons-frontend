@@ -102,10 +102,21 @@ const CrudUsuaris = () => {
     const updateUsuari = async () => {
         await axios.put(REST_URL + '/put/' + usuariSeleccionat.ID_USUARI, usuariSeleccionat, config)
             .then(response => {
+                let newData = data.map(usuari => {
+                    if (usuari.ID_USUARI === response.data.data.ID_USUARI) {
+                        return response.data.data;
+                    }
+                    return usuari;
+                });
+                setData(newData);
                 abrirCerrarModalEditar();
-                getUsuaris();
             })
+            .catch(error => {
+                console.log('Error al actualizar el usuario:', error.response);
+            });
     }
+
+
     // ! DELETE
     const deleteUsuari = async () => {
         await axios.delete(REST_URL + "/destroy/" + usuariSeleccionat.ID_USUARI, config)
@@ -118,6 +129,7 @@ const CrudUsuaris = () => {
     // Body Insertar
     const bodyInsertar = (
         <div style={modalStyle}>
+            <form onSubmit={insertUsuari}>
             <br />
             <h3 align="center">Afegir un nou usuari</h3>
             <br />
@@ -129,19 +141,22 @@ const CrudUsuaris = () => {
             <br />
             <TextField name='TELEFON' style={inputMaterial} label="Telèfon" onChange={handleChange} />
             <br />
+            <TextField name='CONTRASENYA' style={inputMaterial} label="Contrasenya" onChange={handleChange} />
             <div align="right">
                 <Button variant="contained" color="primary" onClick={() => insertUsuari()}>Insertar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalInsertar()}>Cancelar</Button>
             </div>
+            </form>
         </div>
     );
     // Body Editar
     const bodyEditar = (
         <div style={modalStyle}>
+            <form onSubmit={updateUsuari}>
             <br />
             <h3 align="center">Editar Usuari</h3>
             <br />
-            <TextField name='DNI' style={inputMaterial} label="Nom Comercial" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.DNI} />
+            <TextField name='DNI' style={inputMaterial} label="DNI" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.DNI} />
             <br />
             <TextField name='NOM_COMPLET' style={inputMaterial} label="Nom Complet" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.NOM_COMPLET} />
             <br />
@@ -151,10 +166,12 @@ const CrudUsuaris = () => {
             <br />
             <TextField name='CONTRASENYA' style={inputMaterial} label="Contrasenya" onChange={handleChange} />
             <br />
+                <TextField name='ADMINISTRADOR' style={inputMaterial} label="Administrador" onChange={handleChange} value={usuariSeleccionat && usuariSeleccionat.ADMINISTRADOR} />
             <div align="right">
                 <Button variant="contained" color="primary" onClick={() => updateUsuari()}>Actualitzar</Button>
                 <Button variant="contained" color="secondary" onClick={() => abrirCerrarModalEditar()}>Cancelar</Button>
             </div>
+                </form>
         </div>
     );
     const bodyEliminar = (
@@ -168,6 +185,17 @@ const CrudUsuaris = () => {
 
         </div>
     )
+    // Pagination
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(99);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
     return (
         <div>
             <br />
@@ -186,7 +214,8 @@ const CrudUsuaris = () => {
                     </TableHead>
 
                     <TableBody>
-                        {data.map((usuari) => (
+                        {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((usuari) => (
                             <TableRow key={usuari.ID_USUARI}>
                                 {Object.entries(usuari).map(([key, value]) => (
                                     <TableCell
@@ -205,6 +234,15 @@ const CrudUsuaris = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <TablePagination
+                component="div"
+                count={data.length}
+                page={page}
+                onPageChange={handleChangePage}
+                rowsPerPage={rowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+
             <Modal open={modalInsertar} onClose={abrirCerrarModalInsertar}>
                 {bodyInsertar}
             </Modal>

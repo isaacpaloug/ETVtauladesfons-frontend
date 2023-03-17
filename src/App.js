@@ -18,9 +18,9 @@ import Inici from "./componentes/Inici";
 import AdminSelect from "./components/protect/AdminRoutes";
 import AllotjamentInfo from "./componentes/allotjamentInfo";
 import NoAdminRoutes from "./components/protect/NoAdminRoutes";
-import Usuaris from "./components/usuaris/usuaris";
 import DestcAllotjaments from "./components/crud/DestacAllotjament";
 import BarraCerca from "./componentes/BarraCerca";
+import EditUsuario from "./components/usuaris/EditUsuario";
 
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
           <Route path="/contacte" element={<ContactForm />} />
           <Route path="/allotjament/:id" element={<AllotjamentInfo />} />
           <Route element={<NoAdminRoutes />} >
-            <Route path="/usuari" element={<Usuaris />} />
+            <Route path="/usuari" element={<EditUsuario />} />
           </Route>
           <Route element={<ProtectedRoutesAdmin />} >
             <Route element={<AdminSelect />} path="/adminMenu" />

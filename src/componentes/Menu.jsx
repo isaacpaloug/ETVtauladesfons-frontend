@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Navbar, Nav, Modal, Input, Container } from "react-bootstrap";
+import { Navbar, Nav, Modal, Container } from "react-bootstrap";
 import { Outlet, Link } from "react-router-dom";
 import LoginForm from "./login";
 import Cookies from "js-cookie";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { MDBFooter } from 'mdb-react-ui-kit';
-import BarraCerca from "./BarraCerca";
 
 
 function Menu() {
@@ -32,8 +31,6 @@ function Menu() {
                         <>
                             <Link className="nav-link" to="/reserves">Reserves</Link>
                             <Link className="nav-link" to="/usuari">Usuari</Link>
-                            <Link className="nav-link" to="/upload">Upload</Link>
-                            <Link className="nav-link" to="/comentaris">Comentaris</Link>
                         </>
                     )}
                     {isAdmin && (

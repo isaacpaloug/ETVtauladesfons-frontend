@@ -1,7 +1,6 @@
 //importamos los comp creados
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Menu from "./componentes/Menu";
-import { Button } from "react-bootstrap";
 import Registro from "./componentes/registrarse";
 import ContactForm from "./componentes/formulario";
 import CrudAllotjaments from "./components/crud/Allotjaments";
@@ -19,10 +18,7 @@ import AdminSelect from "./components/protect/AdminRoutes";
 import AllotjamentInfo from "./componentes/allotjamentInfo";
 import NoAdminRoutes from "./components/protect/NoAdminRoutes";
 import DestcAllotjaments from "./components/crud/DestacAllotjament";
-import BarraCerca from "./componentes/BarraCerca";
 import EditUsuario from "./components/usuaris/EditUsuario";
-import UploadFotos from "./componentes/uploadfotografies";
-import Comentario from "./componentes/comentaris";
 
 
 function App() {
@@ -38,19 +34,14 @@ function App() {
           <Route path="/allotjament/:id" element={<AllotjamentInfo />} />
           <Route element={<NoAdminRoutes />} >
             <Route path="/usuari" element={<EditUsuario />} />
-            <Route path="/upload" element={<UploadFotos />} />
-            <Route path="/comentaris" element={<Comentario />} />
           </Route>
           <Route element={<ProtectedRoutesAdmin />} >
             <Route element={<AdminSelect />} path="/adminMenu" />
             <Route element={<CrudAllotjaments />} path="/crudallotjaments" />
             <Route element={<CrudCategories />} path="/crudcategories" />
             <Route element={<CrudUsuaris />} path="/crudusuaris" />
-            {/* <Route element={<CrudFotos />} path="/crudfotos" /> */}
-            {/* <Route element={<CrudValoracions />} path="/crudvaloraciones" /> */}
             <Route element={<CrudIdiomes />} path="/crudidiomes" />
             <Route element={<CrudServeis />} path="/crudserveis" />
-            {/* <Route element={<CrudAlojServicios />} path="/crudalojservicios" /> */}
             <Route element={<CrudTipusAllotjaments />} path="/crudtipusallot" />
             <Route element={<CrudVacances />} path="/crudvacances" />
             <Route element={<CrudComentaris />} path="/crudcomentaris" />

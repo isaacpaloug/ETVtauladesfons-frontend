@@ -27,6 +27,10 @@ function AllotjamentInfo() {
 
                 const responseTipusAllot = await axios.get(`http://www.etvtauladesfons.com/api/tipus/${response.data.data.FK_ID_TIPUS}`);
                 setTipusAllot(responseTipusAllot.data.data);
+                const responseVacances = await axios.get(`http://www.etvtauladesfons.com/api/vacances/${response.data.data.FK_ID_VACANCES}`);
+                setVacances(responseVacances.data.data);
+                const responseCategoria = await axios.get(`http://www.etvtauladesfons.com/api/categories/${response.data.data.FK_ID_CATEGORIA}`);
+                setCategoria(responseCategoria.data.data)
 
             } catch (error) {
                 console.error('Error al obtener la información del alojamiento', error);
@@ -43,14 +47,15 @@ function AllotjamentInfo() {
         <div>
             <h1>{allotjament.NOM_COMERCIAL}</h1>
             <h5>{allotjament.DESCRIPCIO}</h5>
-            <p><HotelIcon/> &nbsp;Llits: {allotjament.LLITS}</p>
-            <p><PersonIcon/>&nbsp;Persones: {allotjament.PERSONES}</p>
-            <p><ShowerIcon/>&nbsp;Banys: {allotjament.BANYS}</p>
-            <p><LocationOnIcon/>&nbsp;Adreça: {allotjament.ADREÇA}</p>
-            <p><StarRateIcon/>&nbsp;Valoració: {allotjament.VALORACIO_GLOBAL}</p>
-            <p><LocationCityIcon/>&nbsp;Municipi: {municipi.NOM_MUNICIPI}</p>
+            <p><HotelIcon/> Llits: {allotjament.LLITS}</p>
+            <p><PersonIcon/>Persones: {allotjament.PERSONES}</p>
+            <p><ShowerIcon/>Banys: {allotjament.BANYS}</p>
+            <p><LocationOnIcon/>Adreça: {allotjament.ADREÇA}</p>
+            <p><StarRateIcon/>Valoració: {allotjament.VALORACIO_GLOBAL}</p>
+            <p><LocationCityIcon/>Municipi: {municipi.NOM_MUNICIPI}</p>
             <p>Tipus: {tipusAllot.NOM_TIPUS}</p>
-            {/* Agrega aquí más campos si es necesario */}
+            <p>Tipus de Vacances: {vacances.NOM_VACANCES}</p>
+            <p>Categoria: {categoria.NOM_CATEGORIA}</p>
         </div>
     );
 }
